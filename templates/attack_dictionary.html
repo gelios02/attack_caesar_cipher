@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Словарная атака</h1>
+  <form method="post" action="{{ url_for('attack_dictionary_route') }}">
+    <div class="mb-3">
+      <label for="cipher_text" class="form-label">Шифротекст:</label>
+      <textarea class="form-control" id="cipher_text" name="cipher_text" rows="4">{{ request.form.cipher_text or "" }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Найти осмысленный текст</button>
+  </form>
+  {% if result %}
+    <div class="mt-4">
+      <h2>Наиболее вероятное расшифрование:</h2>
+      <p><strong>Ключ:</strong> {{ result[0] }}</p>
+      <p><strong>Открытый текст:</strong></p>
+      <textarea class="form-control" rows="4" readonly>{{ result[1] }}</textarea>
+
+    </div>
+  {% endif %}
+{% endblock %}

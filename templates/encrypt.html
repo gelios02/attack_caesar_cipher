@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Зашифровать текст (Шифр Цезаря)</h1>
+  <form method="post" action="{{ url_for('encrypt_route') }}">
+    <div class="mb-3">
+      <label for="text" class="form-label">Открытый текст:</label>
+      <textarea class="form-control" id="text" name="text" rows="4">{{ request.form.text or "" }}</textarea>
+    </div>
+    <div class="mb-3">
+      <label for="key" class="form-label">Ключ (0-25):</label>
+      <input type="number" class="form-control" id="key" name="key" min="0" max="25" value="{{ request.form.key or 0 }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Зашифровать</button>
+  </form>
+  {% if result is not none %}
+    <div class="mt-4">
+      <h2>Шифротекст:</h2>
+      <textarea class="form-control" rows="4" readonly>{{ result }}</textarea>
+    </div>
+  {% endif %}
+{% endblock %}

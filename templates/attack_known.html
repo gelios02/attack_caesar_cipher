@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Атака по известному открытому тексту</h1>
+  <form method="post" action="{{ url_for('attack_known_route') }}">
+    <div class="mb-3">
+      <label for="plain_text" class="form-label">Известный открытый текст:</label>
+      <textarea class="form-control" id="plain_text" name="plain_text" rows="4">{{ request.form.plain_text or "" }}</textarea>
+    </div>
+    <div class="mb-3">
+      <label for="cipher_text" class="form-label">Соответствующий шифротекст:</label>
+      <textarea class="form-control" id="cipher_text" name="cipher_text" rows="4">{{ request.form.cipher_text or "" }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Найти ключ</button>
+  </form>
+  {% if key_found is not none %}
+    <div class="mt-4">
+      <h2>Найденный ключ: {{ key_found }}</h2>
+    </div>
+  {% elif request.method == "POST" %}
+    <div class="mt-4">
+      <h2>Ключ не найден</h2>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Атака по шифротексту (перебор ключей)</h1>
+  <form method="post" action="{{ url_for('attack_ciphertext_route') }}">
+    <div class="mb-3">
+      <label for="cipher_text" class="form-label">Шифротекст:</label>
+      <textarea class="form-control" id="cipher_text" name="cipher_text" rows="4">{{ request.form.cipher_text or "" }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Показать варианты</button>
+  </form>
+  {% if possibilities %}
+    <div class="mt-4">
+      <h2>Варианты расшифрования:</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Ключ</th>
+            <th>Открытый текст</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for key, text in possibilities %}
+          <tr>
+            <td>{{ key }}</td>
+            <td>{{ text }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+{% endblock %}

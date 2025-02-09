@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="text-center mb-4">Добро пожаловать в Caesar Cipher Tool</h1>
+  <div class="list-group">
+    <a href="{{ url_for('encrypt_route') }}" class="list-group-item list-group-item-action">Зашифровать текст</a>
+    <a href="{{ url_for('decrypt_route') }}" class="list-group-item list-group-item-action">Расшифровать текст</a>
+    <a href="{{ url_for('attack_known_route') }}" class="list-group-item list-group-item-action">Атака по известному открытому тексту</a>
+    <a href="{{ url_for('attack_ciphertext_route') }}" class="list-group-item list-group-item-action">Атака по шифротексту (перебор ключей)</a>
+    <a href="{{ url_for('attack_dictionary_route') }}" class="list-group-item list-group-item-action">Словарная атака</a>
+  </div>
+{% endblock %}
